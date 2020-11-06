@@ -40,6 +40,10 @@ const useStyles = makeStyles({
     top: 0,
     right: 0,
     margin: 10
+  },
+  link: {
+    color: "inherit",
+    textDecoration: "inherit"
   }
 })
 
@@ -279,8 +283,9 @@ function App() {
           <Typography variant="body2" gutterBottom className={styles.footerText}>
             Made with <i className="fas fa-heart" /> by Robert Boutillier
             <br />
-            {/* TODO add link to my github and link to google form */}
-            <i className="fab fa-github" /> GitHub
+            <a href='https://github.com/rbout/roulettephobia' target="_blank" rel="noreferrer" className={styles.link}>
+              <i className="fab fa-github" /> GitHub
+            </a>
           </Typography>
         </div>
       </div>
