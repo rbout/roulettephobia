@@ -1,14 +1,20 @@
 import React from 'react'
 import RuleButton from "./components/RuleButton"
-import Typography from "@material-ui/core/Typography";
 import {makeStyles} from "@material-ui/core/styles";
 import { createMuiTheme } from "@material-ui/core";
 import { ThemeProvider } from "@material-ui/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
+import Strat from "./components/Strat";
 
 const useStyles = makeStyles({
   rule: {
     textAlign: "center",
+    marginTop: 10,
+    display: 'inline-block'
+  },
+  centerBox: {
+    display: 'flex',
+    justifyContent: 'center',
     marginTop: 10
   }
 })
@@ -76,25 +82,36 @@ function App() {
     ruleTwoNum: null
   })
 
+  const [oneChecked, setOneChecked] = React.useState(false)
+  const [twoChecked, setTwoChecked] = React.useState(false)
+
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <div>
-        <div style={{display: 'flex', justifyContent: 'center', marginTop: 10}}>
-          <RuleButton setState={setState} max={rules.length} color="secondary" />
+        <div className={styles.centerBox}>
+          <RuleButton setState={setState}
+                      state={state}
+                      max={rules.length}
+                      color="secondary"
+                      oneChecked={oneChecked}
+                      twoChecked={twoChecked}
+          />
         </div>
         {state.ruleOneNum !== null &&
-          <div>
-            <Typography variant='body1' className={styles.rule}>
-              {rules[state.ruleOneNum]}
-            </Typography>
-          </div>}
+        <Strat text={rules[state.ruleOneNum]}
+               style={styles.rule}
+               centerBox={styles.centerBox}
+               setState={setOneChecked}
+               state={oneChecked}
+        />}
         {state.ruleTwoNum !== null &&
-          <div>
-            <Typography variant='body1' className={styles.rule}>
-              {rules[state.ruleTwoNum]}
-            </Typography>
-          </div>}
+          <Strat text={rules[state.ruleTwoNum]}
+                 style={styles.rule}
+                 centerBox={styles.centerBox}
+                 setState={setTwoChecked}
+                 state={twoChecked}
+          />}
       </div>
     </ThemeProvider>
   );

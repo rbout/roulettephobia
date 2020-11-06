@@ -8,8 +8,12 @@ function getRandomInt(max) {
 export default function RuleButton(props) {
   return (
     <Button variant={"contained"} color={props.color} onClick={() => {
-      let ruleOne = getRandomInt(props.max)
-      let ruleTwo = getRandomInt(props.max)
+      let ruleOne = props.state.ruleOneNum
+      let ruleTwo = props.state.ruleTwoNum
+      if(!props.oneChecked)
+        ruleOne = getRandomInt(props.max)
+      if(!props.twoChecked)
+        ruleTwo = getRandomInt(props.max)
       while(ruleOne === ruleTwo)
         ruleTwo = getRandomInt(props.max)
       props.setState({ruleOneNum: ruleOne, ruleTwoNum: ruleTwo})
