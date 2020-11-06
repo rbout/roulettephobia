@@ -1,11 +1,12 @@
 import React from 'react'
 import Checkbox from '@material-ui/core/Checkbox'
 import Typography from "@material-ui/core/Typography";
+import Paper from "@material-ui/core/Paper";
 
 export default function Strat(props) {
   return (
     <div className={props.centerBox}>
-      <div className={props.style}>
+      <Paper className={props.style} variant="outlined">
         <Checkbox color="primary" onChange={() => {
           props.setState(!props.state)
         }}/>
@@ -15,7 +16,7 @@ export default function Strat(props) {
         <Typography variant='subtitle1'>
           {props.text}
         </Typography>
-      </div>
+      </Paper>
     </div>
   )
 }

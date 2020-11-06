@@ -5,17 +5,33 @@ import { createMuiTheme } from "@material-ui/core";
 import { ThemeProvider } from "@material-ui/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Strat from "./components/Strat";
+import Divider from "@material-ui/core/Divider";
+import Typography from "@material-ui/core/Typography";
 
 const useStyles = makeStyles({
   rule: {
     textAlign: "center",
     marginTop: 10,
-    display: 'inline-block'
+    display: 'inline-block',
+    width: 600,
+    padding: 10
+
   },
   centerBox: {
     display: 'flex',
     justifyContent: 'center',
     marginTop: 10
+  },
+  footer: {
+    position: "absolute",
+    bottom: 0,
+    width: "100%",
+    height: 75
+  },
+  footerText: {
+    fontSize: 13,
+    color: '#c2c2c2',
+    textAlign: "center"
   }
 })
 
@@ -227,6 +243,18 @@ function App() {
                  setState={setTwoChecked}
                  state={twoChecked}
           />}
+      </div>
+      <div className={styles.footer}>
+
+        <Divider />
+        <div className={styles.centerBox}>
+          <Typography variant="body2" gutterBottom className={styles.footerText}>
+            Made with <i className="fas fa-heart" /> by Robert Boutillier
+            <br />
+            {/* TODO add link to my github and link to google form */}
+            <i className="fab fa-github" /> GitHub
+          </Typography>
+        </div>
       </div>
     </ThemeProvider>
   );
