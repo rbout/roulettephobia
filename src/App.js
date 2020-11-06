@@ -8,6 +8,7 @@ import Strat from "./components/Strat";
 import Divider from "@material-ui/core/Divider";
 import Typography from "@material-ui/core/Typography";
 import Switch from "@material-ui/core/Switch";
+import Cookies from 'universal-cookie';
 
 const useStyles = makeStyles({
   rule: {
@@ -42,15 +43,27 @@ const useStyles = makeStyles({
   }
 })
 
+// TODO Make this code more legible
 
 function App() {
+
+  const cookies = new Cookies()
+
+  const [darkMode, setDarkMode] = React.useState(false)
 
   const [state, setState] = React.useState({
     ruleOneNum: null,
     ruleTwoNum: null
   })
 
-  const [darkMode, setDarkMode] = React.useState(false)
+  React.useEffect(() => {
+    if(cookies.get('darkMode') !== undefined) {
+      setDarkMode(cookies.get('darkMode') === 'true')
+    }
+    if(cookies.get('ruleOneNum') !== undefined && cookies.get('ruleTwoNum') !== undefined) {
+      setState({ruleOneNum: parseInt(cookies.get('ruleOneNum')), ruleTwoNum: parseInt(cookies.get('ruleTwoNum'))})
+    }
+  }, [])
 
   const theme = createMuiTheme({
     palette: {
@@ -230,6 +243,7 @@ function App() {
       <CssBaseline />
       <div>
         <Switch checked={darkMode} className={styles.darkMode} color='primary' onChange={() => {
+          cookies.set('darkMode', !darkMode, {path: '/'})
           setDarkMode(!darkMode)
         }}/>
         <div className={styles.centerBox}>
