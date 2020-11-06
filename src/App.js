@@ -1,5 +1,14 @@
 import React from 'react'
-import RuleButton from "./components/RuleButton";
+import RuleButton from "./components/RuleButton"
+import Typography from "@material-ui/core/Typography";
+import {makeStyles} from "@material-ui/core/styles";
+
+const useStyles = makeStyles({
+  rule: {
+    textAlign: "center",
+    marginTop: 10
+  }
+})
 
 function App() {
 
@@ -41,6 +50,8 @@ function App() {
     'Adam’s Curse - No more cussing guys - Seriously it\'s not cool and its violent (if drinking, take a shot) (if not drinking, go to ghost room and stay in there 1 curse = 3 seconds)'
   ]
 
+  const styles = useStyles()
+
   const [state, setState] = React.useState({
     ruleOneNum: null,
     ruleTwoNum: null
@@ -48,11 +59,21 @@ function App() {
 
   return (
     <div>
-      <div>
+      <div style={{display: 'flex', justifyContent: 'center', marginTop: 10}}>
         <RuleButton setState={setState} max={rules.length}/>
       </div>
-      {state.ruleOneNum !== null && <p>{rules[state.ruleOneNum]}</p>}
-      {state.ruleTwoNum !== null && <p>{rules[state.ruleTwoNum]}</p>}
+      {state.ruleOneNum !== null &&
+        <div>
+          <Typography variant='body1' className={styles.rule}>
+            {rules[state.ruleOneNum]}
+          </Typography>
+        </div>}
+      {state.ruleTwoNum !== null &&
+        <div>
+          <Typography variant='body1' className={styles.rule}>
+            {rules[state.ruleTwoNum]}
+          </Typography>
+        </div>}
     </div>
   );
 }
