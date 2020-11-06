@@ -53,6 +53,7 @@ const theme = createMuiTheme({
 
 function App() {
 
+  // TODO do this with a csv or something better idk
   const rules = [
     {
       title: 'Financially responsible',
