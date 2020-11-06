@@ -7,6 +7,7 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import Strat from "./components/Strat";
 import Divider from "@material-ui/core/Divider";
 import Typography from "@material-ui/core/Typography";
+import Switch from "@material-ui/core/Switch";
 
 const useStyles = makeStyles({
   rule: {
@@ -32,26 +33,40 @@ const useStyles = makeStyles({
     fontSize: 13,
     color: '#c2c2c2',
     textAlign: "center"
+  },
+  darkMode: {
+    position: "absolute",
+    top: 0,
+    right: 0,
+    margin: 10
   }
 })
 
-const theme = createMuiTheme({
-  palette: {
-    primary: {
-      light: '#ff784e',
-      main: '#ff5722',
-      dark: '#b23c17'
-    },
-    secondary: {
-      light: '#834bff',
-      main: '#651fff',
-      dark: '#4615b2'
-    },
-    type: 'dark'
-  }
-})
 
 function App() {
+
+  const [state, setState] = React.useState({
+    ruleOneNum: null,
+    ruleTwoNum: null
+  })
+
+  const [darkMode, setDarkMode] = React.useState(false)
+
+  const theme = createMuiTheme({
+    palette: {
+      primary: {
+        light: '#ff784e',
+        main: '#ff5722',
+        dark: '#b23c17'
+      },
+      secondary: {
+        light: '#834bff',
+        main: '#651fff',
+        dark: '#4615b2'
+      },
+      type: darkMode ? 'dark' : 'light'
+    }
+  })
 
   // TODO do this with a csv or something better idk
   const rules = [
@@ -207,11 +222,6 @@ function App() {
 
   const styles = useStyles()
 
-  const [state, setState] = React.useState({
-    ruleOneNum: null,
-    ruleTwoNum: null
-  })
-
   const [oneChecked, setOneChecked] = React.useState(false)
   const [twoChecked, setTwoChecked] = React.useState(false)
 
@@ -219,6 +229,9 @@ function App() {
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <div>
+        <Switch checked={darkMode} className={styles.darkMode} color='primary' onChange={() => {
+          setDarkMode(!darkMode)
+        }}/>
         <div className={styles.centerBox}>
           <RuleButton setState={setState}
                       state={state}
