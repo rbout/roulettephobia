@@ -32,7 +32,6 @@ const useStyles = makeStyles({
   },
   footerText: {
     fontSize: 13,
-    color: '#c2c2c2',
     textAlign: "center"
   },
   darkMode: {
@@ -55,10 +54,15 @@ function App() {
 
   const [darkMode, setDarkMode] = React.useState(false)
 
+  const [oneChecked, setOneChecked] = React.useState(false)
+  const [twoChecked, setTwoChecked] = React.useState(false)
+
   const [state, setState] = React.useState({
     ruleOneNum: null,
     ruleTwoNum: null
   })
+
+  // TODO make it a single cookie JSON object
 
   React.useEffect(() => {
     if(cookies.get('darkMode') !== undefined) {
@@ -66,6 +70,12 @@ function App() {
     }
     if(cookies.get('ruleOneNum') !== undefined && cookies.get('ruleTwoNum') !== undefined) {
       setState({ruleOneNum: parseInt(cookies.get('ruleOneNum')), ruleTwoNum: parseInt(cookies.get('ruleTwoNum'))})
+    }
+    if(cookies.get('oneChecked') !== undefined) {
+      setOneChecked(cookies.get('oneChecked') === 'true')
+    }
+    if(cookies.get('twoChecked') !== undefined) {
+      setTwoChecked(cookies.get('twoChecked') === 'true')
     }
   }, [])
 
@@ -239,9 +249,6 @@ function App() {
 
   const styles = useStyles()
 
-  const [oneChecked, setOneChecked] = React.useState(false)
-  const [twoChecked, setTwoChecked] = React.useState(false)
-
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
@@ -266,6 +273,7 @@ function App() {
                centerBox={styles.centerBox}
                setState={setOneChecked}
                state={oneChecked}
+               name={'oneChecked'}
         />}
         {state.ruleTwoNum !== null &&
           <Strat text={rules[state.ruleTwoNum].text}
@@ -274,17 +282,22 @@ function App() {
                  centerBox={styles.centerBox}
                  setState={setTwoChecked}
                  state={twoChecked}
+                 name={'twoChecked'}
           />}
       </div>
       <div className={styles.footer}>
 
         <Divider />
         <div className={styles.centerBox}>
-          <Typography variant="body2" gutterBottom className={styles.footerText}>
+          <Typography variant="body2" gutterBottom className={styles.footerText} color='textSecondary'>
             Made with <i className="fas fa-heart" /> by Robert Boutillier
             <br />
             <a href='https://github.com/rbout/roulettephobia' target="_blank" rel="noreferrer" className={styles.link}>
               <i className="fab fa-github" /> GitHub
+            </a>
+            <br />
+            <a href='https://www.linkedin.com/in/robert-boutillier-0aa0ba15b/' target="_blank" rel="noreferrer" className={styles.link}>
+              <i className="fab fa-linkedin"></i> Linkedin
             </a>
           </Typography>
         </div>
