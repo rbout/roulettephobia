@@ -297,7 +297,7 @@ function App() {
             </a>
             <br />
             <a href='https://www.linkedin.com/in/robert-boutillier-0aa0ba15b/' target="_blank" rel="noreferrer" className={styles.link}>
-              <i className="fab fa-linkedin"></i> Linkedin
+              <i className="fab fa-linkedin"/> Linkedin
             </a>
           </Typography>
         </div>
