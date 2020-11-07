@@ -16,10 +16,10 @@ export default function Strat(props) {
           props.setState(!props.state)
         }}/>
         <Typography variant='h5'>
-          {props.title}
+          {props.rule.title}
         </Typography>
         <Typography variant='subtitle1' color='textSecondary'>
-          {props.text}
+          {props.rule.text}
         </Typography>
       </Paper>
     </div>

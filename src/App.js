@@ -43,6 +43,10 @@ const useStyles = makeStyles({
   link: {
     color: "inherit",
     textDecoration: "inherit"
+  },
+  description: {
+    textAlign: "center",
+    marginTop: 30
   }
 })
 
@@ -279,8 +283,7 @@ function App() {
           />
         </div>
         {state.ruleOneNum !== null &&
-        <Strat text={rules[state.ruleOneNum].text}
-               title={rules[state.ruleOneNum].title}
+        <Strat rule={rules[state.ruleOneNum]}
                style={styles.rule}
                centerBox={styles.centerBox}
                setState={setOneChecked}
@@ -288,14 +291,17 @@ function App() {
                name={'oneChecked'}
         />}
         {state.ruleTwoNum !== null &&
-          <Strat text={rules[state.ruleTwoNum].text}
-                 title={rules[state.ruleTwoNum].title}
+          <Strat rule={rules[state.ruleOneNum]}
                  style={styles.rule}
                  centerBox={styles.centerBox}
                  setState={setTwoChecked}
                  state={twoChecked}
                  name={'twoChecked'}
           />}
+        {state.ruleOneNum === null && state.ruleTwoNum === null &&
+          <Typography variant='h5' className={styles.description}>
+            Strat roulette for Phasmophobia, click roll to begin!
+          </Typography>}
       </div>
       <div className={styles.footer}>
 
