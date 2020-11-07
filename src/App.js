@@ -245,6 +245,18 @@ function App() {
       title: 'Winner, winner, chicken dinner',
       text: 'Only one investigator survives',
     },
+    {
+      title: 'Damn interns, chicken dinner',
+      text: 'Parabolic mic and writing book to find ghost room',
+    },
+    {
+      title: 'You shall not pass',
+      text: 'Cannot leave doors open',
+    },
+    {
+      title: 'The Cartographer',
+      text: 'Must walk around the entire map once before finding evidence (don’t need to enter rooms)',
+    },
   ]
 
   const styles = useStyles()
