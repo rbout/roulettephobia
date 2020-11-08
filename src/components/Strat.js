@@ -8,18 +8,27 @@ export default function Strat(props) {
 
   const cookies = new Cookies()
 
+  const {
+    centerBox,
+      style,
+      state,
+      cookieName,
+      title,
+      text
+  } = props
+
   return (
-    <div className={props.centerBox}>
-      <Paper className={props.style} variant="outlined">
-        <Checkbox color="primary" checked={props.state} onChange={() => {
-          cookies.set(props.name, !props.state, {path: '/'})
-          props.setState(!props.state)
+    <div className={centerBox}>
+      <Paper className={style} variant="outlined">
+        <Checkbox color="primary" checked={state} onChange={() => {
+          cookies.set(cookieName, !state, {path: '/'})
+          props.setState(!state)
         }}/>
         <Typography variant='h5'>
-          {props.rule.title}
+          {title}
         </Typography>
         <Typography variant='subtitle1' color='textSecondary'>
-          {props.rule.text}
+          {text}
         </Typography>
       </Paper>
     </div>

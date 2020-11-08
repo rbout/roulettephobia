@@ -1,6 +1,7 @@
 import React from 'react'
 import Button from '@material-ui/core/Button'
 import Cookies from 'universal-cookie';
+import {COOKIES} from "../utils/constants";
 
 function getRandomInt(max) {
   return Math.floor(Math.random() * Math.floor(max))
@@ -9,20 +10,29 @@ function getRandomInt(max) {
 export default function RuleButton(props) {
 
   const cookies = new Cookies()
+  const {
+      state,
+      oneChecked,
+      twoChecked,
+      setState,
+      color,
+      max
+  } = props
+
 
   return (
-    <Button variant={"contained"} color={props.color} onClick={() => {
-      let ruleOne = props.state.ruleOneNum
-      let ruleTwo = props.state.ruleTwoNum
-      if(!props.oneChecked)
-        ruleOne = getRandomInt(props.max)
-      if(!props.twoChecked)
-        ruleTwo = getRandomInt(props.max)
+    <Button variant={"contained"} color={color} onClick={() => {
+      let ruleOne = state.ruleOneNum
+      let ruleTwo = state.ruleTwoNum
+      if(!oneChecked)
+        ruleOne = getRandomInt(max)
+      if(!twoChecked)
+        ruleTwo = getRandomInt(max)
       while(ruleOne === ruleTwo)
-        ruleTwo = getRandomInt(props.max)
-      props.setState({ruleOneNum: ruleOne, ruleTwoNum: ruleTwo})
-      cookies.set('ruleOneNum', ruleOne, {path: '/'})
-      cookies.set('ruleTwoNum', ruleTwo, {path: '/'})
+        ruleTwo = getRandomInt(max)
+      setState({ruleOneNum: ruleOne, ruleTwoNum: ruleTwo})
+      cookies.set(COOKIES.ruleOneNum, ruleOne, {path: '/'})
+      cookies.set(COOKIES.ruleTwoNum, ruleTwo, {path: '/'})
     }}>
       Roll
     </Button>
