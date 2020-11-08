@@ -9,6 +9,7 @@ import Divider from "@material-ui/core/Divider";
 import Typography from "@material-ui/core/Typography";
 import Switch from "@material-ui/core/Switch";
 import Cookies from 'universal-cookie';
+import {COOKIES} from "./utils/constants";
 
 const useStyles = makeStyles({
   rule: {
@@ -69,17 +70,17 @@ function App() {
   // TODO make it a single cookie JSON object
 
   React.useEffect(() => {
-    if(cookies.get('darkMode') !== undefined) {
-      setDarkMode(cookies.get('darkMode') === 'true')
+    if(cookies.get(COOKIES.darkMode) !== undefined) {
+      setDarkMode(cookies.get(COOKIES.darkMode) === 'true')
     }
-    if(cookies.get('ruleOneNum') !== undefined && cookies.get('ruleTwoNum') !== undefined) {
-      setState({ruleOneNum: parseInt(cookies.get('ruleOneNum')), ruleTwoNum: parseInt(cookies.get('ruleTwoNum'))})
+    if(cookies.get(COOKIES.ruleOneNum) !== undefined && cookies.get(COOKIES.ruleTwoNum) !== undefined) {
+      setState({ruleOneNum: parseInt(cookies.get(COOKIES.ruleOneNum)), ruleTwoNum: parseInt(cookies.get(COOKIES.ruleTwoNum))})
     }
-    if(cookies.get('oneChecked') !== undefined) {
-      setOneChecked(cookies.get('oneChecked') === 'true')
+    if(cookies.get(COOKIES.oneChecked) !== undefined) {
+      setOneChecked(cookies.get(COOKIES.oneChecked) === 'true')
     }
-    if(cookies.get('twoChecked') !== undefined) {
-      setTwoChecked(cookies.get('twoChecked') === 'true')
+    if(cookies.get(COOKIES.twoChecked) !== undefined) {
+      setTwoChecked(cookies.get(COOKIES.twoChecked) === 'true')
     }
   }, [])
 
@@ -270,7 +271,7 @@ function App() {
       <CssBaseline />
       <div>
         <Switch checked={darkMode} className={styles.darkMode} color='primary' onChange={() => {
-          cookies.set('darkMode', !darkMode, {path: '/'})
+          cookies.set(COOKIES.darkMode, !darkMode, {path: '/'})
           setDarkMode(!darkMode)
         }}/>
         <div className={styles.centerBox}>
@@ -283,25 +284,23 @@ function App() {
           />
         </div>
         {state.ruleOneNum !== null &&
-        <Strat rule={rules[state.ruleOneNum]}
+        <Strat text={rules[state.ruleOneNum].text}
+               title={rules[state.ruleOneNum].title}
                style={styles.rule}
                centerBox={styles.centerBox}
                setState={setOneChecked}
                state={oneChecked}
-               name={'oneChecked'}
+               cookieName={COOKIES.oneChecked}
         />}
         {state.ruleTwoNum !== null &&
-          <Strat rule={rules[state.ruleOneNum]}
+          <Strat text={rules[state.ruleTwoNum].text}
+                 title={rules[state.ruleTwoNum].title}
                  style={styles.rule}
                  centerBox={styles.centerBox}
                  setState={setTwoChecked}
                  state={twoChecked}
-                 name={'twoChecked'}
+                 cookieName={COOKIES.twoChecked}
           />}
-        {state.ruleOneNum === null && state.ruleTwoNum === null &&
-          <Typography variant='h5' className={styles.description}>
-            Strat roulette for Phasmophobia, click roll to begin!
-          </Typography>}
       </div>
       <div className={styles.footer}>
 
