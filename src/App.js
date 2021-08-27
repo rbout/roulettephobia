@@ -134,6 +134,10 @@ function App() {
       text: 'No cameras, head mounted camera only',
     },
     {
+      title: 'Outlast',
+      text: 'No flashlights, only cameras to see in the dark',
+    },
+    {
       title: 'Leapfrog',
       text: '“jump” over teammates',
     },
